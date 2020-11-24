@@ -1,0 +1,28 @@
+#!/bin/sh
+
+### if [ $(whoami) != "root" ]; then
+###   echo "Are you sure you want to do this as $(whoami)?"
+###   echo -n "hit ctrl-c to abort, return to continue"
+###   read xxx
+### fi
+
+if [ "$1" = "-dir" ]; then
+  export PYPEDIR=$2
+  shift; shift
+fi
+
+if [ "$PYPEDIR" = "" ]; then
+  echo "set PYPEDIR first"
+  exit 0
+fi
+
+export PYTHONVER=$(./pydetect -v)
+export PYTHONFULLVER=$(./pydetect -vv)
+export PYTHONEXE=$(./pydetect -f)
+export PYTHONPREFIX=$(./pydetect -p)
+export PYPEDIR
+
+export WHO=`/usr/bin/whoami`
+
+
+/usr/bin/make -f Buildfile $*

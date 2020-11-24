@@ -1,0 +1,7 @@
+#!/bin/sh
+args="clobber install wrapper"
+if [ ! "$*" = "" ]; then
+  args="$*"
+fi
+echo "running: ./build $args"
+sudo env PYPEDIR=/auto/share/pype2/`uname -m` ./build $args

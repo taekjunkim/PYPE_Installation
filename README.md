@@ -6,3 +6,4 @@
     - pype2_32bit
         - revised to work with eth32 box
     - pype2_64bit with PWM
+        - revised to work with eth32 box & pulse width modulation control in 64bit machine    

@@ -3,3 +3,5 @@
     - https://github.com/mazerj/pype2  
     - https://github.com/mazerj/pype3
 2. This repository incluldes revised PYPE code
+    - pype2_32bit
+    - pype2_64bit with PWM

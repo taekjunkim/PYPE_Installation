@@ -3,33 +3,33 @@
 
 
 ## 1. Download Ubuntu 16.04 64bit desktop image, and install
-- http://releases.ubuntu.com/16.04/
--	Install available system update
+http://releases.ubuntu.com/16.04/
+Install available system update
 
 ## 2. Install Nvidia driver
--	Remove old version of Nvidia if your graphic is supported
-- $ sudo apt-get purge nvidia*
--	First, add the ppa:graphics-drivers/ppa repository into the system
-- $ sudo add-apt-repository ppa:graphics-drivers/ppa
-- $ sudo apt update
--	Next, identify your graphic card model and recommended driver:
-- $ ubuntu-drivers devices
-    - ### Following is an example output
-    - == /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
-    - modalias : pci:v000010DEd00001C03sv00001043sd000085ABbc03sc00i00
-    - vendor   : NVIDIA Corporation
-    - model    : GP106 [GeForce GTX 1060 6GB]
-    - driver   : nvidia-driver-390 - third-party free
-    - driver   : nvidia-driver-410 - third-party free recommended
-    - driver   : nvidia-driver-396 - third-party free
-    - driver   : xserver-xorg-video-nouveau - distro free builtin
-    - -	Install all recommended drivers automatically:
-    - $ sudo ubuntu-drivers autoinstall
-    - -	Or selectively using the apt command
-    - ### nvidia-410, nvidia-390,.... 
-    - $ sudo apt install nvidia-410
-    - -	Reboot the system
-    - 	$ sudo reboot
+Remove old version of Nvidia if your graphic is supported
+$ sudo apt-get purge nvidia*
+First, add the ppa:graphics-drivers/ppa repository into the system
+$ sudo add-apt-repository ppa:graphics-drivers/ppa
+$ sudo apt update
+Next, identify your graphic card model and recommended driver:
+$ ubuntu-drivers devices
+    ### Following is an example output
+    == /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
+    modalias : pci:v000010DEd00001C03sv00001043sd000085ABbc03sc00i00
+    vendor   : NVIDIA Corporation
+    model    : GP106 [GeForce GTX 1060 6GB]
+    driver   : nvidia-driver-390 - third-party free
+    driver   : nvidia-driver-410 - third-party free recommended
+    driver   : nvidia-driver-396 - third-party free
+    driver   : xserver-xorg-video-nouveau - distro free builtin
+    - Install all recommended drivers automatically:
+    $ sudo ubuntu-drivers autoinstall
+    - Or selectively using the apt command
+    ### nvidia-410, nvidia-390,.... 
+    $ sudo apt install nvidia-410
+    - Reboot the system
+    $ sudo reboot
 
 ## 3. Add eyelink repository and install dev kit
 $ sudo sh ./eyelink-install.sh

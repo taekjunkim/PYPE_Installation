@@ -15,8 +15,8 @@ set -e
 ### In this case, the script will print the message "Run this script with sudo, not as root" 
 ### and exit with a status code of 1 (exit 1), indicating an error.
 if [ -z "$SUDO_USER" ]; then
-  echo "Run this script with sudo, not as root"
-  exit 1
+    echo "Run this script with sudo, not as root"
+    exit 1
 fi
 
 ### The command starts by calling lsb_release -i, 
@@ -45,14 +45,14 @@ TARFILE="$1"
 ### the script is running on an Ubuntu or Debian distribution, 
 ### on a 64-bit machine and the passed TARFILE argument is a valid file.
 if [ "$DISTRO" != "Ubuntu" ] && [ "$DISTRO" != "Debian" ]; then
-  echo "This script expects Ubuntu or Debian!"
-  exit 1
+    echo "This script expects Ubuntu or Debian!"
+    exit 1
 elif [ "$MACHINE" != "x86_64" ]; then
-  echo "This script expects a 64-bit kernel!"
-  exit 1
+    echo "This script expects a 64-bit kernel!"
+    exit 1
 elif [ ! -e "$TARFILE" ]; then
-  echo "File \"$TARFILE\" doesn't exist!"
-  exit 1
+    echo "File \"$TARFILE\" doesn't exist!"
+    exit 1
 fi
 
 USER_HOME=$(eval echo ~${SUDO_USER})
@@ -68,7 +68,7 @@ sudo apt install python3.10
 sudo apt install python3-pip
 
 pip3 install h5py numpy PyOpengl pandas Pillow pygame scipy pmw
-sudo apt-get install python3-pil.imagetk 
+sudo apt-get install python3-pil.imagetk
 
 #PACKAGES="python3-all-dev python3-comedilib python3-h5py \
 #python3-numpy python3-opengl python3-pandas \
@@ -94,14 +94,14 @@ sudo apt install ${PACKAGES} -yy
 # Turn off automatic updates and update notifications on Ubuntu
 ### I don't know whether the following settings are working well in recent ubuntu versions
 if [ "$DISTRO" = "Ubuntu" ]; then
-  # Turn off automatic updates
-  sed -i 's/"[0-9][0-9]*"/"0"/g' /etc/apt/apt.conf.d/10periodic
-  # Don't look for new OS releases
-  sed -i 's/^\(Prompt=\).*/\1never/' /etc/update-manager/release-upgrades
-  # Turn off update notifications
-  gconftool -s --type bool /apps/update-notifier/auto_launch false
-  gconftool -s --type bool /apps/update-notifier/no_show_notifications true
-  gconftool -s --type int /apps/update-notifier/regular_auto_launch_interval 2147483647
+    # Turn off automatic updates
+    sed -i 's/"[0-9][0-9]*"/"0"/g' /etc/apt/apt.conf.d/10periodic
+    # Don't look for new OS releases
+    sed -i 's/^\(Prompt=\).*/\1never/' /etc/update-manager/release-upgrades
+    # Turn off update notifications
+    gconftool -s --type bool /apps/update-notifier/auto_launch false
+    gconftool -s --type bool /apps/update-notifier/no_show_notifications true
+    gconftool -s --type int /apps/update-notifier/regular_auto_launch_interval 2147483647
 fi
 
 # Make all cores use the performance governor (max frequency all the time)
@@ -120,26 +120,26 @@ fi
 # Plexon machines can backup the pype computer
 # only do it for the shapelab user
 if [ "$SUDO_USER" = "shapelab" ]; then
-  (echo 'mel&co'; echo 'mel&co') | smbpasswd -a -s $SUDO_USER
-  SMB_CONF=/etc/samba/smb.conf
+    (echo 'mel&co'; echo 'mel&co') | smbpasswd -a -s $SUDO_USER
+    SMB_CONF=/etc/samba/smb.conf
 
-  # Append the following to the smb.conf (if we haven't already)
-  if ! grep -q "^\[$SUDO_USER\]" "$SMB_CONF"; then
-    # share doesn't exist, go ahead
-    ### create a back-up file
-    cp "$SMB_CONF" "$SMB_CONF".$(date +%Y%m%d_%H%M%S).bak
+    # Append the following to the smb.conf (if we haven't already)
+    if ! grep -q "^\[$SUDO_USER\]" "$SMB_CONF"; then
+        # share doesn't exist, go ahead
+        ### create a back-up file
+        cp "$SMB_CONF" "$SMB_CONF".$(date +%Y%m%d_%H%M%S).bak
 
-    ### append the text between EOF and EOF to the smb.conf file
-    cat >> "$SMB_CONF" <<EOF
+        ### append the text between EOF and EOF to the smb.conf file
+        cat >> "$SMB_CONF" <<EOF
 [$SUDO_USER]
    path = /home/$SUDO_USER
    guest ok = yes
    read only = no
 EOF
   
-    /usr/sbin/service smbd restart
-    # This share now lives at \\IP_ADDRESS\shapelab
-  fi
+        /usr/sbin/service smbd restart
+        # This share now lives at \\IP_ADDRESS\shapelab
+    fi
 fi
 
 ### This script creates a temporary directory called "pypeinst" in the /tmp directory, 
@@ -150,7 +150,7 @@ fi
 ### This ensures that the temporary directory is always removed even if the script is terminated prematurely.
 tempdir=$(mktemp -d -p /tmp pypeinst.XXXXXXXX)
 function cleanup {
-  rm -rf "$tempdir"
+    rm -rf "$tempdir"
 }
 trap cleanup EXIT
 
